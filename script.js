@@ -8,6 +8,7 @@ let listTodo = [];
 
 const form = document.getElementById("addTodo");
 const display = document.getElementById("display");
+const clear = document.getElementById("clear");
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -20,7 +21,7 @@ display.onclick = function(event) {
     let e = event.target;
     let id = event.target.id;
     deleteTodo(e,id);
-};
+}
 
 display.addEventListener ("change", (event) => {
     if (event.target.className !== "check-todo")
@@ -31,6 +32,10 @@ display.addEventListener ("change", (event) => {
 
     doneTodo(id, checkState);
 });
+
+clear.onclick = function(event) {
+    clearTodos(event);
+}
 
 
 function addTodo() {
@@ -110,7 +115,12 @@ function addTodo() {
 
 function checkTodo() {
     for ( let i = 0; i < listTodo.length; i++ ) {
-        console.log(listTodo[i].ref, listTodo[i].state, document.querySelector("input#"+listTodo[i].ref+".check-todo").checked, listTodo[i].todoContent);
+        check = document.querySelectorAll("#"+listTodo[i].ref);
+        let exists = false;
+        if (check.length > -1 && check.length < 5 ) {
+            exists = true;
+        }
+        console.log(`Local Storage Check: [${(i+1)}] Reference: ${listTodo[i].ref} | State: ${listTodo[i].state} | Todo: ${listTodo[i].todoContent} |Exists on Page: ${exists}`);
     }
     console.log("Todos loaded.");
 }
@@ -168,6 +178,23 @@ function saveTodo() {
 function loadTodos() {
     let saved = localStorage.getItem("listTodo");
     if (saved !== null) {
-        tasks = JSON.parse(saved);
+        listTodo = JSON.parse(saved);
+    } else {
+        console.log("Todo list is empty.");
     }
+}
+
+function clearTodos(e) {
+    let todoIndex = listTodo.map(index => index.ref);
+    console.log(todoIndex);
+    setTimeout(() => {
+        todoIndex.forEach(item => {
+            let pageItem = document.querySelector("li#"+item);
+            pageItem.remove();
+            console.log(`Removing from storage: ${item}`);
+            let removeIndex = listTodo.findIndex(todo => todo.ref === item);
+            listTodo.splice(removeIndex, 1);
+            console.log(`Removed from storage, remaining: ${listTodo.length}`);
+        });
+    }, 2000);
 }
