@@ -1,7 +1,7 @@
 let todo = {
     ref: "",
     state: false, 
-    todo: "task",
+    todoContent: "task",
 };
 
 let listTodo = [];
@@ -32,14 +32,6 @@ display.addEventListener ("change", (event) => {
     doneTodo(id, checkState);
 });
 
-display.addEventListener ("input", (event) => {
-    if (event.className !== "edit-todo")
-        return;
-
-    let id = event.id;
-
-    editTodo(id);
-});
 
 function addTodo() {
     let acceptTodo = document.getElementById("add-todo");
@@ -54,11 +46,13 @@ function addTodo() {
         r = (Math.random() + 1).toString(36).substring(7);
     }
 
+    console.log(r, todoText);
+
     listTodo.push(
         {
             ref: r,
             state: false,
-            todo: todoText
+            todoContent: todoText
         }
     );
 
@@ -84,10 +78,18 @@ function addTodo() {
     });
 
     const todoVal = document.createElement("span");
-    todo.id = r;
+    todoVal.id = r;
     todoVal.className = "edit-todo";
     todoVal.textContent = todoText;
     todoVal.contentEditable = "true";
+
+    todoVal.addEventListener("blur", editTodo);
+    todoVal.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            todoVal.blur();
+        }
+    });
 
     const deleteButton = document.createElement("button");
     deleteButton.id = r;
@@ -108,7 +110,7 @@ function addTodo() {
 
 function checkTodo() {
     for ( let i = 0; i < listTodo.length; i++ ) {
-        console.log(listTodo[i].state, document.querySelector("input#"+listTodo[i].ref+".check-todo").checked, listTodo[i].todo);
+        console.log(listTodo[i].ref, listTodo[i].state, document.querySelector("input#"+listTodo[i].ref+".check-todo").checked, listTodo[i].todoContent);
     }
     console.log("Todos loaded.");
 }
@@ -131,30 +133,19 @@ function doneTodo(id,checkState) {
     checkTodo();
 }
 
-function editTodo(id) {
+function editTodo(e) {
 
-    let text = document.querySelector("span#"+id+".edit-todo");
-    const newTodo = document.createElement("input");
-    newTodo.type = "text";
-    newTodo.id = id;
-    newTodo.className = "editing";
-    newTodo.value = text.textContent;
+    console.log(e.target.id);
 
-    newTodo.addEventListener("blur", function(){
+    let lookItem = e.target.id;
+    
+    let todoItem = listTodo.find(todo => todo.ref === lookItem);
 
-        let original = listTodo.find(todo => todo.ref === id)?.todo;
+    let newTodo = e.target.textContent;
 
-        if (newTodo.value !== original) {
-            original = newTodo.value;
-        }
+    console.log(todoItem.todoContent, newTodo);
 
-        text.textContent = this.value;
-        this.replaceWith(text);
-    });
-
-    text.replaceWith(newTodo);
-
-    newTodo.focus();
+    todoItem.todoContent = newTodo;
 
     console.log("Todo edited.");
     checkTodo();
