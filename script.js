@@ -214,8 +214,8 @@ function deleteTodo(e,id) {
     console.log(id);
     let remove = document.querySelector("li#"+id);
     remove.remove();
-    listTodo = listTodo.filter(item =>item != id);
-    saveTodo();
+    newTodos = listTodo.filter(item => item !== id);
+    localStorage.setItem("listTodo",JSON.stringify(newTodos));
     checkTodo();
     console.log("Todo deleted.");
 }
