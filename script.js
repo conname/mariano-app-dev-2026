@@ -58,12 +58,14 @@ function addTodo() {
     let acceptTodo = document.getElementById("add-todo");
     let todoText = acceptTodo.value;
     if (todoText === "") {
-        return; /* add error message */
+        acceptTodo.style.setProperty("--placeholder","red");
+        acceptTodo.placeholder = "add a task hey.";
+        return;
     }
 
     let r = "";
 
-    while (/^[a-zA-Z]/.test(r) === false) {
+    while (/^[a-zA-Z]/.test(r) === false && listTodo.some(item => item.ref === ref)) {
         r = (Math.random() + 1).toString(36).substring(7);
     }
 
@@ -184,9 +186,15 @@ function editTodo(e) {
 
     console.log(todoItem.todoContent, newTodo);
 
-    todoItem.todoContent = newTodo;
+    if (newTodo !== "") {
+        todoItem.todoContent = newTodo;
 
-    console.log("Todo edited.");
+        console.log("Todo edited.");
+    
+    } else {
+        deleteTodo(e, lookItem);
+    }
+    
     checkTodo();
 }
 
