@@ -137,6 +137,10 @@ function addTodo() {
 
     display.appendChild(li);
 
+    acceptTodo.style.setProperty("--placeholder","#f0f2f5");
+    acceptTodo.placeholder = "";
+        
+
     console.log("Todo saved.");
 
     checkTodo();
