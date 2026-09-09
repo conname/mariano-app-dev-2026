@@ -250,9 +250,7 @@ function clearTodos(e) {
             let removeIndex = listTodo.findIndex(todo => todo.ref === item);
             listTodo = listTodo.splice(removeIndex, 1);
             console.log(`Removed from storage, remaining: ${listTodo.length}`);
+            saveTodo();
         });
     }, 2000);
-    if (localStorage.getItem("listTodo") !== null) {
-        localStorage.clear();
-    }
 }
