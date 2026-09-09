@@ -63,7 +63,7 @@ function addTodo() {
         return;
     } else {
         acceptTodo.style.setProperty("--placeholder","#f0f2f5");
-        acceptTodo.placeholder = "";
+        acceptTodo.placeholder = "task?";
     }
 
     let r = "";
