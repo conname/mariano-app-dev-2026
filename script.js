@@ -11,7 +11,7 @@ const textarea = document.getElementById("add-todo");
 const display = document.getElementById("display");
 const clear = document.getElementById("clear");
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
     loadTodos();
 });
 
@@ -230,8 +230,9 @@ function loadTodos() {
     let saved = localStorage.getItem("listTodo");
     if (saved !== null) {
         listTodo = JSON.parse(saved);
-        saved.forEach(item => {
+        listTodo.forEach(item => {
             renderTodos(item.ref,item.todoContent);
+            console.log(item.ref, item.state, item.todoContent);
         });
     } else {
         console.log("Todo list is empty.");
@@ -239,7 +240,7 @@ function loadTodos() {
 }
 
 function clearTodos(e) {
-    console.log(todoIndex);
+    let todoIndex = listTodo.ref;
     setTimeout(() => {
         todoIndex.forEach(item => {
             let pageItem = document.querySelector("li#"+item);
