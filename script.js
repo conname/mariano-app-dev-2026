@@ -91,6 +91,16 @@ function addTodo() {
     acceptTodo.value = "";
     saveTodo();
     
+    renderTodos(r, todoText);
+        
+    console.log("Todo saved.");
+
+    checkTodo();
+    
+}
+
+function renderTodos(r,todoText) {
+    
     const li = document.createElement("li");
     li.id = r;
     li.className = "todo";
@@ -145,11 +155,6 @@ function addTodo() {
     li.append(deleteButton);
 
     display.appendChild(li);
-        
-    console.log("Todo saved.");
-
-    checkTodo();
-    
 }
 
 function checkTodo() {
@@ -225,6 +230,9 @@ function loadTodos() {
     let saved = localStorage.getItem("listTodo");
     if (saved !== null) {
         listTodo = JSON.parse(saved);
+        saved.forEach(item => {
+            renderTodos(item.ref,item.todoContent);
+        });
     } else {
         console.log("Todo list is empty.");
     }
