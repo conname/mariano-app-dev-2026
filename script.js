@@ -252,5 +252,7 @@ function clearTodos(e) {
             console.log(`Removed from storage, remaining: ${listTodo.length}`);
         });
     }, 2000);
-    localStorage.clear();
+    if (localStorage.getItem("listTodo") !== null) {
+        localStorage.clear();
+    }
 }
