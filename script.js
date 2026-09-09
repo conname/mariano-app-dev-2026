@@ -240,7 +240,8 @@ function loadTodos() {
 }
 
 function clearTodos(e) {
-    let todoIndex = listTodo.ref;
+    let todoIndex = listTodo.map(item => item.ref);
+    console.log(todoIndex);
     setTimeout(() => {
         todoIndex.forEach(item => {
             let pageItem = document.querySelector("li#"+item);
