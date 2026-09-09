@@ -30,6 +30,8 @@ textarea.addEventListener("input", function() {
 
 textarea.addEventListener("blur", function () {
     this.style.height = "";
+    this.style.setProperty("--placeholder","#f0f2f5");
+    this.placeholder = "task?";
 });
 
 display.onclick = function(event) {
