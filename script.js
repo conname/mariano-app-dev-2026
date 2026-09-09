@@ -253,4 +253,7 @@ function clearTodos(e) {
             saveTodo();
         });
     }, 2000);
+    if (localStorage.getItem("listTodo") !== null) {
+        localStorage.clear();
+    }
 }
