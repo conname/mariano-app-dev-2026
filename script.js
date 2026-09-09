@@ -136,11 +136,7 @@ function addTodo() {
     li.append(deleteButton);
 
     display.appendChild(li);
-
-    acceptTodo.style.setProperty("--placeholder","#f0f2f5");
-    acceptTodo.placeholder = "";
         
-
     console.log("Todo saved.");
 
     checkTodo();
@@ -148,6 +144,9 @@ function addTodo() {
 }
 
 function checkTodo() {
+    let acceptTodo = document.querySelector(".addTodo");
+    acceptTodo.style.setProperty("--placeholder","#f0f2f5");
+    acceptTodo.placeholder = "";
     for ( let i = 0; i < listTodo.length; i++ ) {
         check = document.querySelectorAll("#"+listTodo[i].ref);
         let exists = false;
