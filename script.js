@@ -244,6 +244,7 @@ function clearTodos(e) {
     console.log(todoIndex);
     setTimeout(() => {
         if (localStorage.getItem("listTodo") !== null) {
+            listTodo = [];
             localStorage.clear();
         }
         loadTodos();
