@@ -205,6 +205,7 @@ function deleteTodo(e,id) {
     let removeIndex = listTodo.findIndex(todo => todo.ref === id);
     if (removeIndex !== -1) {
         listTodo.splice(removeIndex,1);
+        saveTodo();
     }
     let remove = document.querySelector("li#"+id);
     remove.remove();
