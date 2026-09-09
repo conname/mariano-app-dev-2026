@@ -6,22 +6,199 @@
   background-color: #f0f2f5;
 }
 
+/* Headline — Crete Round */
+.headline, h1, h2 {
+  font-family: 'Crete Round', serif !important;
+  font-weight: 700;
+}
+
+/* Subhead — Schibsted Grotesk */
+.subhead, h3, h4 {
+  font-family: 'Schibsted Grotesk', sans-serif !important;
+  font-weight: 600;
+}
+
+/* Body — Georama */
+body, p, .body-text {
+  font-family: 'Georama', sans-serif !important;
+  font-weight: 400;
+}
+
 #center {
-  width: 300px;
-  height: 200px;
-  background-color: #007bff;
+  width: auto;
+  max-width: 300px;
+  height: auto;
+  min-height: 200px;
+  background-color: #8dbff5;
   color: white;
-  display:  grid;
-  place-items: center;
-  border-radius: 8px;
+  display:  flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px
 }
 
 ul {
+  width: 100%;
+  padding-left: 0;
   list-style-type: none;
+}
+
+.center {
+  display:  flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   padding-left: 0;
   margin-left: 0;
+  width: 100%;
+}
+
+#addTodo {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+
+.addTodo {
+  flex: 1;
+  resize: none;
+  overflow-y: hidden;
+  min-width: 24px;
+  line-height: 1.5em;
+  box-sizing: border-box;
+  field-sizing: content;
+
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+textarea::placeholder {
+  color: #f0f2f5 !important;
+  opacity: 1;
+  font-weight: bold;
+}
+
+.addButton {
+  float: right;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+
+  color: #f0f2f5;
+
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.addButton:hover {
+  text-decoration: underline;
 }
 
 #clear {
   margin-top: auto;
+
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+
+  font-weight: 300;
+
+  background: none;
+  border: none;
+  outline: none;
+}
+
+#clear:hover {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+
+  font-weight: 600;
+}
+
+.todo{
+  border-bottom: 2px solid #333;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: left;
+}
+
+.edit-todo {
+  flex: 1;
+  display: block;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  outline:  none;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #333;
+}
+
+.delete {
+  float: right;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+
+  width: 20px;
+
+  background: none;
+  border: none;
+  outline: none;
+
+  font-family: 'Georama', sans-serif !important;
+  font-weight: 400;
+  color: red;
+  
+}
+
+.delete:hover {
+  text-decoration: underline;
+}
+
+.check-todo *,
+.check-todo *::before,
+.check-todo *::after {
+  box-sizing: border-box;
+}
+
+.check-todo label {
+  display: block;
+  width: 17.5px;
+  height: 17.5px;
+  cursor: pointer;
+}
+
+.check-todo input {
+  visibility: hidden;
+  display: none;
+}
+
+.check-todo input:checked ~ .checkbox {
+  transform: rotate(45deg);
+  width: 14px;
+  border-color: white;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-radius: 0;
+}
+
+.check-todo .checkbox {
+  display: block;
+  width: inherit;
+  height: inherit;
+  border: 3px solid #434343;
+  border-radius: 6px;
+  transition: all 0.375s;
 }

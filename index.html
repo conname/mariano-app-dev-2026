@@ -1,23 +1,27 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta  name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prelim Exam ToDo</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crete+Round&family=Schibsted+Grotesk:wght@500;600;700;800;900&family=Georama:wght@300;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="center">
-        <ul>
+        <div class="center">
             <form id="addTodo">
-                <input type="text" id="add-todo" name="add-todo" placeholder="add a task" value="">
-                <input type="submit" value="add">
+                <textarea rows="1" id="add-todo" class="addTodo subhead" name="add-todo" placeholder="task?" value=""></textarea>
+                <input type="submit" value="✓" class="addButton subhead">
             </form>
-        </ul>
+          </div>
         <ul id="display">
 
         </ul>
-        <ul><button id="clear">Clear All</button></ul>
+        <ul class="center"><button id="clear">🗑</button></ul>
     </div>
   </body>
 </html>
