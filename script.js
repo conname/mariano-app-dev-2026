@@ -214,8 +214,9 @@ function deleteTodo(e,id) {
     console.log(id);
     let remove = document.querySelector("li#"+id);
     remove.remove();
-    newTodos = listTodo.filter(item => item !== id);
-    localStorage.setItem("listTodo",JSON.stringify(newTodos));
+    removeIndex = listTodo.findIndex(iten => item.ref === id);
+    listTodo.splice(removeIndex,1);
+    localStorage.setItem("listTodo",JSON.stringify(listTodo));
     checkTodo();
     console.log("Todo deleted.");
 }
@@ -226,7 +227,7 @@ function saveTodo() {
 }
 
 function loadTodos() {
-    let saved = localStorage.getItem("listTodo");
+    const saved = localStorage.getItem("listTodo");
     if (saved !== null) {
         listTodo = JSON.parse(saved);
         listTodo.forEach(item => {
@@ -247,6 +248,7 @@ function clearTodos(e) {
             listTodo = [];
             localStorage.clear();
         }
+        console.log(listTodo);
         loadTodos();
     }, 2000);
 }
