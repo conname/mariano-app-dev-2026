@@ -160,11 +160,13 @@ function renderTodos(r,todoText) {
 function checkTodo() {
     for ( let i = 0; i < listTodo.length; i++ ) {
         check = document.querySelectorAll("#"+listTodo[i].ref);
+        const actualTodo = localStorage.getItem("storedTodo");
+        checkActual = JSON.parse(actualTodo);
         let exists = false;
         if (check.length > -1 ) {
             exists = true;
         }
-        console.log(`Local Storage Check: [${(i+1)}] Reference: ${listTodo[i].ref} | State: ${listTodo[i].state} | Todo: ${listTodo[i].todoContent} | Exists on Page: ${exists}`);
+        console.log(`Local Storage Check: [${(i+1)}] Reference: ${checkActual[i].ref} | State: ${checkActual[i].state} | Todo: ${checkActual[i].todoContent} | Exists on Page: ${exists}`);
     }
     console.log("Todos loaded.");
 }
@@ -185,6 +187,7 @@ function doneTodo(id,checkState) {
             complete.classList.add("completed");
         }
     }
+    saveTodo();
     checkTodo();
 }
 
@@ -214,20 +217,20 @@ function deleteTodo(e,id) {
     console.log(id);
     let remove = document.querySelector("li#"+id);
     remove.remove();
-    removeIndex = listTodo.findIndex(iten => item.ref === id);
+    removeIndex = listTodo.findIndex(item => item.ref === id);
     listTodo.splice(removeIndex,1);
-    localStorage.setItem("listTodo",JSON.stringify(listTodo));
+    localStorage.setItem("storedTodo",JSON.stringify(listTodo));
     checkTodo();
     console.log("Todo deleted.");
 }
 
 function saveTodo() {
-    localStorage.setItem("listTodo",JSON.stringify(listTodo));
+    localStorage.setItem("storedTodo",JSON.stringify(listTodo));
     checkTodo();
 }
 
 function loadTodos() {
-    const saved = localStorage.getItem("listTodo");
+    const saved = localStorage.getItem("storedTodo");
     if (saved !== null) {
         listTodo = JSON.parse(saved);
         listTodo.forEach(item => {
@@ -244,9 +247,9 @@ function clearTodos(e) {
     let todoIndex = listTodo.map(item => item.ref);
     console.log(todoIndex);
     setTimeout(() => {
-        if (localStorage.getItem("listTodo") !== null) {
+        if (localStorage.getItem("storedTodo") !== null) {
             listTodo = [];
-            localStorage.clear();
+            localStorage.removeItem("storedTodo");
         }
         console.log(listTodo);
         loadTodos();
