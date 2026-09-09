@@ -204,7 +204,7 @@ function editTodo(e) {
 function deleteTodo(e,id) {
     let removeIndex = listTodo.findIndex(todo => todo.ref === id);
     if (removeIndex !== -1) {
-        listTodo.splice(removeIndex,1);
+        listTodo = listTodo.splice(removeIndex,1);
         saveTodo();
     }
     let remove = document.querySelector("li#"+id);
@@ -235,7 +235,7 @@ function clearTodos(e) {
             pageItem.remove();
             console.log(`Removing from storage: ${item}`);
             let removeIndex = listTodo.findIndex(todo => todo.ref === item);
-            listTodo.splice(removeIndex, 1);
+            listTodo = listTodo.splice(removeIndex, 1);
             console.log(`Removed from storage, remaining: ${listTodo.length}`);
             saveTodo();
         });
