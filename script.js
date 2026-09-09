@@ -243,17 +243,9 @@ function clearTodos(e) {
     let todoIndex = listTodo.map(item => item.ref);
     console.log(todoIndex);
     setTimeout(() => {
-        todoIndex.forEach(item => {
-            let pageItem = document.querySelector("li#"+item);
-            pageItem.remove();
-            console.log(`Removing from storage: ${item}`);
-            let removeIndex = listTodo.findIndex(todo => todo.ref === item);
-            listTodo = listTodo.splice(removeIndex, 1);
-            console.log(`Removed from storage, remaining: ${listTodo.length}`);
-            saveTodo();
-        });
+        if (localStorage.getItem("listTodo") !== null) {
+            localStorage.clear();
+        }
+        renderTodos();
     }, 2000);
-    if (localStorage.getItem("listTodo") !== null) {
-        localStorage.clear();
-    }
 }
