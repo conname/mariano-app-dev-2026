@@ -161,7 +161,7 @@ function checkTodo() {
     for ( let i = 0; i < listTodo.length; i++ ) {
         check = document.querySelectorAll("#"+listTodo[i].ref);
         let exists = false;
-        if (check.length > -1 && check.length === 4 ) {
+        if (check.length > -1 ) {
             exists = true;
         }
         console.log(`Local Storage Check: [${(i+1)}] Reference: ${listTodo[i].ref} | State: ${listTodo[i].state} | Todo: ${listTodo[i].todoContent} | Exists on Page: ${exists}`);
@@ -211,19 +211,18 @@ function editTodo(e) {
 }
 
 function deleteTodo(e,id) {
-    let removeIndex = listTodo.findIndex(todo => todo.ref === id);
-    if (removeIndex !== -1) {
-        listTodo = listTodo.splice(removeIndex,1);
-        saveTodo();
-    }
+    console.log(id);
     let remove = document.querySelector("li#"+id);
     remove.remove();
+    listTodo = listTodo.filter(item =>item != id);
+    saveTodo();
     checkTodo();
     console.log("Todo deleted.");
 }
 
 function saveTodo() {
     localStorage.setItem("listTodo",JSON.stringify(listTodo));
+    checkTodo();
 }
 
 function loadTodos() {
