@@ -61,11 +61,14 @@ function addTodo() {
         acceptTodo.style.setProperty("--placeholder","red");
         acceptTodo.placeholder = "add a task hey.";
         return;
+    } else {
+        acceptTodo.style.setProperty("--placeholder","#f0f2f5");
+        acceptTodo.placeholder = "";
     }
 
     let r = "";
 
-    while (/^[a-zA-Z]/.test(r) === false && listTodo.some(item => item.ref === ref)) {
+    while (/^[a-zA-Z]/.test(r) === false) {
         r = (Math.random() + 1).toString(36).substring(7);
     }
 
@@ -144,9 +147,6 @@ function addTodo() {
 }
 
 function checkTodo() {
-    let acceptTodo = document.querySelector(".addTodo");
-    acceptTodo.style.setProperty("--placeholder","#f0f2f5");
-    acceptTodo.placeholder = "";
     for ( let i = 0; i < listTodo.length; i++ ) {
         check = document.querySelectorAll("#"+listTodo[i].ref);
         let exists = false;
@@ -191,9 +191,7 @@ function editTodo(e) {
 
     if (newTodo !== "") {
         todoItem.todoContent = newTodo;
-
         console.log("Todo edited.");
-    
     } else {
         deleteTodo(e, lookItem);
     }
@@ -206,7 +204,8 @@ function deleteTodo(e,id) {
     if (removeIndex !== -1) {
         listTodo.splice(removeIndex,1);
     }
-    e.closest("li").remove();
+    let remove = document.querySelector("li#"+id);
+    remove.remove();
     checkTodo();
     console.log("Todo deleted.");
 }
