@@ -246,6 +246,6 @@ function clearTodos(e) {
         if (localStorage.getItem("listTodo") !== null) {
             localStorage.clear();
         }
-        renderTodos();
+        loadTodos();
     }, 2000);
 }
