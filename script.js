@@ -11,6 +11,10 @@ const textarea = document.getElementById("add-todo");
 const display = document.getElementById("display");
 const clear = document.getElementById("clear");
 
+document.addEventListener("DOMContentLoaded", () => {
+    loadTodos();
+});
+
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     addTodo();
