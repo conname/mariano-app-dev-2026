@@ -235,6 +235,7 @@ function loadTodos() {
             console.log(item.ref, item.state, item.todoContent);
         });
     } else {
+        renderTodos();
         console.log("Todo list is empty.");
     }
 }
