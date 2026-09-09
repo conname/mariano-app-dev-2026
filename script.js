@@ -227,7 +227,6 @@ function loadTodos() {
 }
 
 function clearTodos(e) {
-    let todoIndex = listTodo.map(index => index.ref);
     console.log(todoIndex);
     setTimeout(() => {
         todoIndex.forEach(item => {
@@ -237,7 +236,7 @@ function clearTodos(e) {
             let removeIndex = listTodo.findIndex(todo => todo.ref === item);
             listTodo = listTodo.splice(removeIndex, 1);
             console.log(`Removed from storage, remaining: ${listTodo.length}`);
-            localStorage.clear();
         });
     }, 2000);
+    localStorage.clear();
 }
