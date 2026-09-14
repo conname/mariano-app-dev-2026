@@ -11,6 +11,7 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 });
 
+// get request
 app.get("/", (req, res) => {
     res.json(users);
 });
@@ -34,4 +35,22 @@ app.post("/users", (req, res) =>{
     users.push(newUser);
 
     res.status(201).json(newUser);
+});
+
+// put request
+app.put("/users/id", (req, res) =>{
+    const id = parseInt(req.params.id);
+
+    const index = users.findIndex((u) => u.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    users[index] = {
+        id: id,
+        ...req.body
+    };
+
+    res.json(user[index]);
 });
